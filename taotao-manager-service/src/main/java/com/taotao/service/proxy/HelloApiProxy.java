@@ -1,4 +1,4 @@
-package com.taotao.api.proxy;
+package com.taotao.service.proxy;
 
 import com.taotao.api.HelloApi;
 import com.taotao.common.Result;

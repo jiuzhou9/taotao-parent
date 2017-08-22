@@ -7,9 +7,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.taotao</groupId>
-    <artifactId>manager-console</artifactId>
+    <artifactId>taotao-manager-console</artifactId>
     <packaging>war</packaging>
-    <name>manager-console Maven Webapp</name>
+    <name>taotao-manager-console Maven Webapp</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <!--<dependency>
@@ -56,6 +56,11 @@
             <artifactId>spring-aspects</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
         <!-- JSP相关 -->
         <dependency>
             <groupId>jstl</groupId>
@@ -83,6 +88,6 @@
 
     </dependencies>
     <build>
-        <finalName>manager-console</finalName>
+        <finalName>taotao-manager-console</finalName>
     </build>
 </project>

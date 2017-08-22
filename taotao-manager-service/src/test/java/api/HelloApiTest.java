@@ -14,7 +14,8 @@ public class HelloApiTest {
     public static HelloApi api;
     @Before
     public void setUp() throws Exception {
-        api= (HelloApi) new HessianProxyFactory().create(HelloApi.class,"http://localhost:8080/taotao-manager-service/api/helloApi");
+        String url = "http://localhost:8080/taotao-manager-service/api/helloApi";
+        api= (HelloApi) new HessianProxyFactory().create(HelloApi.class,url);
     }
 
     @Test

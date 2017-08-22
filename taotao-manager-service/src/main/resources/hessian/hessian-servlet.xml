@@ -18,18 +18,17 @@
     <aop:aspectj-autoproxy/>
 
     <!--配置接口服务，访问路径localhost:8080/api/helloProxy-->
-    <bean id="helloProxy" class="com.taotao.api.proxy.HelloApiProxy"/>
+    <bean id="helloProxy" class="com.taotao.service.proxy.HelloApiProxy"/>
     <bean name="/helloApi" class="org.springframework.remoting.caucho.HessianServiceExporter">
         <property name="service" ref="helloProxy"/>
         <property name="serviceInterface" value="com.taotao.api.HelloApi"/>
     </bean>
 
-    <!--文件上传-->
-    <!--<bean id="fileUploadServiceProxy" class="cn.jiuzhou.file.service.proxy.FileUploadServiceProxy"/>
-    <bean name="/fileUploadServiceApi" class="org.springframework.remoting.caucho.HessianServiceExporter">
-        <property name="service" ref="fileUploadServiceProxy"/>
-        <property name="serviceInterface" value="cn.jiuzhou.file.api.FileUploadServiceApi"/>
-    </bean>-->
+    <bean id="itemServiceProxy" class="com.taotao.service.proxy.ItemServiceApiProxy"></bean>
+    <bean name="/itemServiceApi" class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <property name="service" ref="itemServiceProxy"></property>
+        <property name="serviceInterface" value="com.taotao.api.ItemServiceApi"></property>
+    </bean>
 
 
 </beans>
