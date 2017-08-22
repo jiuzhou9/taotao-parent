@@ -4,4 +4,28 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+    <!--spring配置-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:application/applicationContext.xml</param-value>
+    </context-param>
+
+    <!--hessian配置-->
+    <servlet>
+        <servlet-name>hessian</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <!--hessian-servlet.xml由来 servlet-name节点值加servlet-->
+            <param-value>classpath*:hessian/hessian-servlet.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>hessian</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
 </web-app>

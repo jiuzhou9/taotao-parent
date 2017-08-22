@@ -13,12 +13,12 @@
     <name>taotao-manager-service Maven Webapp</name>
     <url>http://maven.apache.org</url>
     <dependencies>
-        <!--<dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>3.8.1</version>
             <scope>test</scope>
-        </dependency>-->
+        </dependency>
         <dependency>
             <groupId>com.taotao</groupId>
             <artifactId>taotao-manager-mapper</artifactId>
