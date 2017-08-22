@@ -11,7 +11,7 @@
     </listener>
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:springmvc/applicationContext.xml</param-value>
+        <param-value>classpath:application/applicationContext.xml</param-value>
     </context-param>
 
     <!--hessian配置-->
