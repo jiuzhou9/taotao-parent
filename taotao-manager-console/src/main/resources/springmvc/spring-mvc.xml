@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context-3.0.xsd
+         http://www.springframework.org/schema/tx
+         http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+         http://www.springframework.org/schema/aop
+         http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+         ">
+
+    <!--扫描器-->
+    <context:component-scan base-package="com.taotao.console.controller"></context:component-scan>
+
+    <!--解决ajax application http status 406 问题 java类的序列化-->
+    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean" />
+    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager" />
+
+    <!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+    <bean id="mappingJacksonHttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>apolication/json; charset=UTF-8</value>
+                <value>text/html;charset=UTF-8</value>
+                <value>text/plain;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+       <!--注解形式加载bean，包扫描-->
+       <context:component-scan base-package="com.taotao.console.controller"></context:component-scan>
+
+       <!--导入配置文件-->
+       <bean id="propertyConfigurer"
+             class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+              <!--配置单个properties-->
+              <!--<property name="location" value="classpath:jdbc/jdbc.properties" />-->
+              <!--配置多个properties-->
+              <property name="locations">
+                     <list>
+                            <!--<value>classpath:jdbc/jdbc.properties</value>-->
+                            <value>classpath:hessian-address/hessian-address.properties</value>
+                     </list>
+              </property>
+       </bean>
+
+
+    <!--视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--jsp 视图解析器-->
+        <!--<property name="prefix" value="/WEB-INF/shop/"></property>
+        <property name="suffix" value=".jsp"></property>-->
+
+        <!--html5视图解析器-->
+        <property name="prefix" value="/WEB-INF/jsp/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+    <!--静态资源加载-->
+    <mvc:resources mapping="/css/**" location="/WEB-INF/css/"></mvc:resources>
+    <mvc:resources mapping="/js/**" location="/WEB-INF/js/"></mvc:resources>
+
+
+    <!--hessian接口  后续可以提出-->
+    <bean id="HelloApi" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${taotao-manager-service-address}/api/helloApi" />
+        <property name="serviceInterface" value="com.taotao.api.HelloApi" />
+    </bean>
+
+    <bean id="itemServiceApi" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${taotao-manager-service-address}/api/itemServiceApi"></property>
+        <property name="serviceInterface" value="com.taotao.api.ItemServiceApi" />
+    </bean>
+</beans>
