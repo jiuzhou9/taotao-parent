@@ -53,6 +53,9 @@ public class ItemServiceApiProxy implements ItemServiceApi {
     }
 
     public Result<PageDetail<ItemDto>> selectPage(int pageNum, int pageSize, ItemDto itemDto) {
+        if (itemDto==null){
+            itemDto = new ItemDto();
+        }
         Item item = new Item();
         BeanUtils.copyProperties(itemDto,item);
         PageInfo<Item> itemPageInfo = itemService.selectPage(pageNum, pageSize,item);

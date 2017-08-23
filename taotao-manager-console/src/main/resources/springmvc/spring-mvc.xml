@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-         http://www.springframework.org/schema/context
-         http://www.springframework.org/schema/context/spring-context-3.0.xsd
-         http://www.springframework.org/schema/tx
-         http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
-         http://www.springframework.org/schema/aop
-         http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
-         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-         ">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!--hessian接口  后续可以提出-->
+    <bean id="itemServiceApi" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${taotao-manager-service-address}/api/itemServiceApi"></property>
+        <property name="serviceInterface" value="com.taotao.api.ItemServiceApi" />
+    </bean>
     <!--扫描器-->
     <context:component-scan base-package="com.taotao.console.controller"></context:component-scan>
 
@@ -34,7 +31,7 @@
         </property>
     </bean>
        <!--注解形式加载bean，包扫描-->
-       <context:component-scan base-package="com.taotao.console.controller"></context:component-scan>
+       <!--<context:component-scan base-package="com.taotao.console.controller"></context:component-scan>-->
 
        <!--导入配置文件-->
        <bean id="propertyConfigurer"
@@ -67,14 +64,8 @@
     <mvc:resources mapping="/js/**" location="/WEB-INF/js/"></mvc:resources>
 
 
-    <!--hessian接口  后续可以提出-->
-    <bean id="HelloApi" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
-        <property name="serviceUrl" value="${taotao-manager-service-address}/api/helloApi" />
-        <property name="serviceInterface" value="com.taotao.api.HelloApi" />
-    </bean>
 
-    <bean id="itemServiceApi" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
-        <property name="serviceUrl" value="${taotao-manager-service-address}/api/itemServiceApi"></property>
-        <property name="serviceInterface" value="com.taotao.api.ItemServiceApi" />
-    </bean>
+
+
+
 </beans>
